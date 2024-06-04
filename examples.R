@@ -7,6 +7,8 @@ A = 2.3
 
 X = matrix(rnorm(n*p), nrow = n)
 X = apply(X,2,g)
+#Supplying an X with normalized columns is recommended
+
 beta = rep(0,p)
 rand_ind = sample(1:p, size = s, replace = FALSE)
 j = rand_ind[1]	#index to test
