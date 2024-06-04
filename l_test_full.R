@@ -38,7 +38,7 @@ qhaar <- function(q,n,lower.tail=TRUE,stoperr=FALSE){
 #this is cdf calculation using glmnet package. The null is always gamma = 0
 l.cdf_glmnet<-function(x,y,X,ind,lambda,lambda_cv, glmnet_object=NULL, glmnet_object_type = 1, adjusted = FALSE, return_both = FALSE, return_dropprob = FALSE){
     # x is the point at which we want to evaluate the conditional cdf
-    
+
     if(return_both){
         adjusted = TRUE
     }
@@ -161,11 +161,16 @@ l.test<-function(y,X,ind, lambda=-1, lambda_cv=-1, glmnet_object=NULL, glmnet_ob
 
 
 
-	if(return_both){
-		adjusted = FALSE
-	}
-	n = nrow(X)
+
+    if(return_both){
+	adjusted = FALSE
+    }
+    n = nrow(X)
     p = ncol(X)
+
+    if(p<=2){
+    	stop('The dimension needs to be at least 3')
+    }
     
     y.std = std(y)
 
@@ -269,7 +274,11 @@ l.test<-function(y,X,ind, lambda=-1, lambda_cv=-1, glmnet_object=NULL, glmnet_ob
 
 l.ci<-function(y,X,ind, gamma_range, lambda=-1, lambda_cv=-1, coverage = 0.95, adjusted = FALSE, display = TRUE, smoothed = TRUE, outer_approx = FALSE, outer_grid.length = 10){
 	# gamma_range is the grid of values to invert the l-test.
-
+	n = nrow(X)
+	p = ncol(X)
+	if(p<=2){
+    		stop('The dimension needs to be at least 3')
+	}
 	gamma_range = sort(gamma_range)
 	if(adjusted & (lambda<0)){
 		stop('If adjusted, the selection lambda must be supplied')
