@@ -1,6 +1,4 @@
 library(glmnet)
-library(MASS)
-library(CVXR)
 
 
 #---------------- auxillary functions --------------------------------
@@ -145,7 +143,7 @@ l.cdf_glmnet<-function(x,y,X,ind,lambda,lambda_cv, glmnet_object=NULL, glmnet_ob
 
 #--------------------------- l-testing codes ---------------------------------------------
 
-l.test<-function(y,X,ind, lambda=-1, lambda_cv=-1, glmnet_object=NULL, glmnet_object_type = 1, adjusted = FALSE, smoothed = FALSE, return_both = FALSE){
+l.test<-function(y,X,ind, lambda=-1, lambda_cv=-1, glmnet_object=NULL, glmnet_object_type = 1, adjusted = FALSE, smoothed = TRUE, return_both = FALSE){
 	# y is the response vector
 	# X is the data matrix WITHOUT the intercept column
     # ind is the index for which we want to test
