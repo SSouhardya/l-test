@@ -1,7 +1,5 @@
 library(glmnet)
 
-
-#---------------- auxillary functions --------------------------------
 std<-function(y){
 	y = as.vector(y)
 	m.y = mean(y)
