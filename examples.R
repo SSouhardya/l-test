@@ -27,9 +27,9 @@ pval_l_adjusted = l.test(y,X,j, adjusted = TRUE, lambda = 0.01) #adjusted l-test
 
 gamma_range = seq(from = beta[j]-10, to = beta[j]+10, length.out = 100) #the grid of \gamma values to test on
 
-l_ci = l.ci(y,X,j, gamma_range = gamma_range, coverage = 0.95) #l-CI
+ci_l = l.ci(y,X,j, gamma_range = gamma_range, coverage = 0.95) #l-CI
 
-l_ci_adjusted = l.ci(y,X,j, gamma_range = gamma_range, coverage = 0.95, lambda = 0.01, adjusted = TRUE) #post-selection l-CI for \beta_j valid conditionally on LASSO with penalty 0.01 selecting the coefficient
+ci_l_adjusted = l.ci(y,X,j, gamma_range = gamma_range, coverage = 0.95, lambda = 0.01, adjusted = TRUE) #post-selection l-CI for \beta_j valid conditionally on LASSO with penalty 0.01 selecting the coefficient
 
 
 
