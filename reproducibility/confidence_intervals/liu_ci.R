@@ -4,7 +4,6 @@ trunc_norm_cdf<-function(x,a,b,mu,sigma){
 		stop('Lower truncation point larger than higher')
 	}
 	normalizer = pnorm(a,mean = mu, sd = sigma) + pnorm(b, mean = mu, sd = sigma, lower.tail = FALSE)
-
 	if(x<=a){
 		return(pnorm(x,mean = mu, sd = sigma)/normalizer)
 	}
