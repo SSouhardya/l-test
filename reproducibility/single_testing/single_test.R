@@ -134,7 +134,7 @@ compare_unconditional_tests<-function(n,p,s,a,b,rho,lambda,alpha,times, set_seed
 #a_vals = rep(4.3, par_number)
 #s = rep(5,par_number)
 #rho = c(0,0.1,0.3,0.5,0.7,0.9)
-#file_name = 'unconditional_test_summary_new_correlation'
+#file_name = 'unconditional_test_summary_correlation'
 #times = 200
 
 #Varying sparsity
