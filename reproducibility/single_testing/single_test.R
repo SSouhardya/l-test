@@ -107,7 +107,7 @@ compare_unconditional_tests<-function(n,p,s,a,b,rho,lambda,alpha,times, set_seed
 
 #Select one of the block of these parameter choices
 
-#Varying amplitude with n and d far
+#BLOCK 1: Left panel of Figure 2
 #par_number = 7
 #n = rep(100, par_number)
 #p = rep(50, par_number)
@@ -117,7 +117,7 @@ compare_unconditional_tests<-function(n,p,s,a,b,rho,lambda,alpha,times, set_seed
 #file_name = 'unconditional_test_summary_setting1'
 #times = 200
 
-#Varying amplitude with n and d close
+#BLOCK 2: Figure 8
 #par_number = 7
 #n = rep(100, par_number)
 #p = rep(90, par_number)
@@ -127,7 +127,7 @@ compare_unconditional_tests<-function(n,p,s,a,b,rho,lambda,alpha,times, set_seed
 #file_name = 'unconditional_test_summary_setting2'
 #times = 200
 
-#Varying inter-variable correlations
+#BLOCK 3: Center panel of Figure 2
 #par_number = 6
 #n = rep(100, par_number)
 #p = rep(50, par_number)
@@ -137,7 +137,7 @@ compare_unconditional_tests<-function(n,p,s,a,b,rho,lambda,alpha,times, set_seed
 #file_name = 'unconditional_test_summary_correlation'
 #times = 200
 
-#Varying sparsity
+#BLOCK 4: Right panel of Figure 2
 #par_number = 8
 #n = rep(100, par_number)
 #p = rep(50, par_number)
