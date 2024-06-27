@@ -162,7 +162,7 @@ plot_uncond('unconditional_test_summary_setting2.list', c(0,1.3,2.3,3.3,4.3,5.3,
 
 
 
-#Reproducing figures 9-10
+#Reproducing figures 9-12
 mgp = c(1.5,0.5,0)  
 oma = c(1,0.25,0.25,0.25) 
 mfrow = c(3,2) 
