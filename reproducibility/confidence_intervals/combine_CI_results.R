@@ -1,4 +1,4 @@
-L = commandArgs(trailingOnly=TRUE) #filename, total_jobs, amplitude?
+L = commandArgs(trailingOnly=TRUE) #parameter_filename, total_jobs, amplitude?, filename_to_save_the_output_if_non_amplitude
 
 par_list = readRDS(L[1])
 
@@ -113,6 +113,5 @@ for(i in 1:instances){
 if(!as.numeric(L[3])){
 	l[[1]] = l[[1]][-1,]
 	l[[2]] = l[[2]][-1,]
-	saveRDS(l,paste0('CI_summary_',label,'.list'))
+	saveRDS(l,paste0(L[4]))
 }
-
