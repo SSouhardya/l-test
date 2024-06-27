@@ -161,7 +161,7 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
 
 
 #input to the above function is a parameter file that should be in the form of a list of lists.
-#each of the individual list should contain three vectors. The first vector should be the values of c(n,p,ind,intercept, rho, lambda, m, coverage, r, margin, sigma, normalize_cols, adjusted, mode, known_sigma) in this order where they mean:
+#each of the individual list should contain two lists. The first list should be the values of c(n,p,ind,intercept, rho, lambda, m, coverage, r, margin, sigma, normalize_cols, adjusted, mode, known_sigma) in this order where they mean:
 
 #n: number of rows of X
 #p: the dimension of X
@@ -177,6 +177,8 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
 #normalize_cols = Whether the columns of the design matrix should be normalized
 #adjusted: TRUE indicates that we want an adjusted confidence interval
 #known_sigma: Whether we should run the \ell-test with a known-sigma. This is only used with the adjusted confidence interval.
+
+#The second list should be the amplitude values to try.
 
 
 #the parameter file should be stored in an .RData file created using saveRDS function.
@@ -195,7 +197,9 @@ par_length = length(par_list)
 
 
 for(iter in 1:par_length){
-	par_vec = par_list[[iter]]
+	li = par_list[[iter]]
+	par_vec = li[[1]]
+	bx_range = li[[2]]
 
 	n = par_vec[1]
 	p = par_vec[2]
@@ -220,11 +224,3 @@ for(iter in 1:par_length){
 
 	ci_simulations(bx_range,n,p,ind, intercept, s, rho, lambda, m, coverage, r, margin, sigma, normalize_cols, adjusted, mode, known_sigma, as.character(iter))
 }
-
-
-
-
-
-
-
-
