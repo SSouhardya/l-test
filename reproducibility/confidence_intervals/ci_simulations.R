@@ -1,7 +1,8 @@
 #may need to change these depending on the location of the files.
 source('~/l_testing.R')
 source('liu_ci.R')
-source('~adjusted_ci.R')
+source('~/adjusted_l_testing.R')
+source('adjusted_ci_with_known_sigma.R')
 
 # TESTS FOR COMPARING LENGTH AND COVERAGE OF THE VARIOUS CIs
 ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=0,lambda = 0.02, m=3, coverage= 0.95, r= 2, margin = 10, sigma, normalize_cols = TRUE, adjusted=TRUE, mode = 1, known_sigma = FALSE, extra_counter = '1'){
@@ -31,8 +32,8 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
  				y.std = std(as.vector(y))
 
  				value_range = seq(from = bx-margin, to = bx+margin, length.out = r)
- 				ci_abs = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = -1, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE,outer_grid.length = 20) )
-  				ci_new = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = lambda, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE,outer_grid.length = 20) )
+ 				ci_abs = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = -1, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE, outer_grid.length = 20, known_sigma = known_sigma) )
+  				ci_new = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = lambda, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE, outer_grid.length = 20, known_sigma = known_sigma) )
 
   				if(length(ci_abs) == 0){
   				    print('CV lambda length 0')
@@ -97,11 +98,11 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
  				y = intercept + X%*%beta + rnorm(n)
 				
  				value_range = seq(from = bx-margin,to = bx+margin, length.out = r)
- 				temp = l.ci(y,X,ind, value_range, lambda = -1, lambda_cv = -1, coverage = coverage, adjusted = FALSE, display = FALSE, outer_approx = TRUE)
+ 				temp = l.ci(y,X,ind, value_range, lambda = -1, lambda_cv = -1, coverage = coverage, adjusted = FALSE, display = FALSE, outer_approx = TRUE, outer_grid.length = r/10)
 
  				ci_l.min = range(temp)
 
- 				temp = l.ci(y,X,ind, value_range, lambda = -2, lambda_cv = -2, coverage = coverage, adjusted = FALSE, display = FALSE, outer_approx = TRUE)
+ 				temp = l.ci(y,X,ind, value_range, lambda = -2, lambda_cv = -2, coverage = coverage, adjusted = FALSE, display = FALSE, outer_approx = TRUE, outer_grid.length = r/10)
  				ci_l.1se = range(temp)
 
  				table_lci.min[1] =  as.numeric(ci_l.min[1] <= bx & bx <= ci_l.min[2])
