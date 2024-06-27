@@ -6,8 +6,6 @@ source('adjusted_ci_with_known_sigma.R')
 
 # TESTS FOR COMPARING LENGTH AND COVERAGE OF THE VARIOUS CIs
 ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=0,lambda = 0.02, m=3, coverage= 0.95, r= 2, margin = 10, sigma, normalize_cols = TRUE, adjusted=TRUE, mode = 1, known_sigma = FALSE, extra_counter = '1'){
-	require(CVXR)
-	require(glmnet)
 	require(MASS)
 	lambda_flag = lambda
 	if(adjusted){	
