@@ -1,4 +1,5 @@
-L = commandArgs(trailingOnly=TRUE) #parameter_filename, total_jobs, amplitude?, filename_to_save_the_output_if_non_amplitude
+L = commandArgs(trailingOnly=TRUE) #parameter_filename, total_jobs, amplitude?, correlation/sparisty
+L = strsplit(L,',')[[1]]
 
 par_list = readRDS(L[1])
 
@@ -12,8 +13,9 @@ l[[2]] = NA
 
 for(i in 1:instances){
 	par = par_list[[i]]
-	m = par[[1]][7]	#this is number of times the for loop was executed
-	adjusted = par[[1]][13]
+	m = par[[1]][8]	#this is number of times the for loop was executed
+	adjusted = par[[1]][14]
+	known_sigma = par[[1]][16]
 
     if(adjusted){
 	    label = 'adjusted'
@@ -22,7 +24,7 @@ for(i in 1:instances){
 	}
 	
 	if(adjusted){
-		bx_length = length(par[[3]])
+		bx_length = length(par[[2]])
 		na_count_abs = rep(total_jobs*m, bx_length ) 
 		na_count_both = na_count_abs
 		na_count_liu = na_count_both
@@ -70,8 +72,8 @@ for(i in 1:instances){
 		#sd_tab[k, c(8,9)] = sqrt(sd_tab[k, c(8,9)]/na_count_liu[k])
 	}
 
-	mean_tab[,1] = par[[3]]
-	sd_tab[,1] = par[[3]]
+	mean_tab[,1] = par[[2]]
+	sd_tab[,1] = par[[2]]
 
 	names(mean_tab) = c('Amplitude', 'coverage_lmin', 'length_lmin', 'coverage_same_cv', 'length_same_cv',  'coverage_liu', 'length_liu')
 	names(sd_tab) = c('Amplitude', 'coverage_lmin', 'length_lmin', 'coverage_same_cv', 'length_same_cv', 'coverage_liu', 'length_liu')
@@ -79,7 +81,7 @@ for(i in 1:instances){
 	write.csv(mean_tab, paste(i,'mean_tab.csv'), row.names = FALSE)
 	write.csv(sd_tab, paste(i,'sd_tab.csv'), row.names = FALSE)
 
-	write.csv(data.frame(Amplitude = par[[3]], n_lmin = na_count_abs, n_same_cv = na_count_both, n_liu = na_count_liu), paste(i,'counts.csv'), row.names = FALSE)
+	write.csv(data.frame(Amplitude = par[[2]], n_lmin = na_count_abs, n_same_cv = na_count_both, n_liu = na_count_liu), paste(i,'counts.csv'), row.names = FALSE)
 	}
 	else{
 		tab_sum = 0
@@ -103,7 +105,11 @@ for(i in 1:instances){
 	if(as.numeric(L[3])){
 		l[[1]] = mean_tab
 		l[[2]] = sd_tab
-		saveRDS(l,paste0('CI_summary_',label,i,'.list'))
+		if(!known_sigma){
+		    saveRDS(l,paste0('CI_summary_',label,i,'.list'))
+		 } else{
+		    saveRDS(l,paste0('CI_summary_',label,i,'_known_sigma.list'))
+		 }
 	} else{
 		l[[1]] =rbind(l[[1]], mean_tab)
 		l[[2]] = rbind(l[[2]], sd_tab)
@@ -113,5 +119,5 @@ for(i in 1:instances){
 if(!as.numeric(L[3])){
 	l[[1]] = l[[1]][-1,]
 	l[[2]] = l[[2]][-1,]
-	saveRDS(l,paste0(L[4]))
+	saveRDS(l,paste0('CI_summary_',label,'_',L[4],'.list'))
 }
