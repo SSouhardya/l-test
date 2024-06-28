@@ -79,7 +79,7 @@ alpha = 0.05
 gamma_length = 100
 
 
-load('HIV_data.RData')
+load('~/reproducibility/data/HIV_data.RData')
 
 l = matrix(0, nrow = 16, ncol = 2)
 l = as.data.frame(l)
