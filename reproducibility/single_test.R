@@ -147,7 +147,7 @@ compare_unconditional_tests<-function(n,p,s,a,b,rho,lambda,alpha,times, set_seed
 #file_name = 'unconditional_test_summary_sparsity' #this is irrelevant if running on cluster.
 #times = 400
 
-cluster = FALSE #indicates whether running on a cluster
+cluster = FALSE #toggle to TRUE only if running on a cluster
 
 if(cluster){
 	slurm_ind = as.numeric(Sys.getenv('SLURM_ARRAY_TASK_ID'))
@@ -160,7 +160,7 @@ run_multiple<-function(times,cluster = FALSE){
 	D[,1] = a_vals
 	for(i in 1:length(a_vals)){
 		print(i)
-		L[[i]] = compare_unconditional_tests(n[i],p[i],s[i],a_vals[i],a_vals[i],rho[i],-2,0.05,times,set_seed = cluster)
+		L[[i]] = compare_unconditional_tests(n[i],p[i],s[i],a_vals[i],a_vals[i],rho[i],-2,0.05,times,set_seed = !cluster)
 		D[i,-1] = L[[i]][[1]]
 	}
 	D = as.data.frame(D)
@@ -174,5 +174,4 @@ run_multiple<-function(times,cluster = FALSE){
 }
 
 
-D = run_multiple(times)
-
+D = run_multiple(times,cluster)
