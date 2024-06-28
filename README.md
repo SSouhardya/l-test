@@ -60,7 +60,10 @@ We first discuss generation of the output files for creating the plots in the pa
    `par_adj_ci_amplitude_known_sigma` respectively and `times` equal 1000 in both the cases. After this, run `reproducibility/scripts/combine_ci_results.sh` to get the desired files.
 3. _For Figure 6_: Run the file `reproducibility/ltest_variability.R` followed by `reproducibility/combine_ltest_variability.R`.
 4. _For Figure 7_: Run the file `reproducibility/three_lambda_choices.R`
+
 Finally, to generate the plots, execute `repoducibility/plot_functions.R` followed by running the appropriate code-block from `reproducibility/plot_commands.R` to get the desired figure.
+
+5. _For the claims in Section 5.5 of the paper_: This section involves an analysis on the HIV drug resistance dataset. The data is available in the folder `data`. Run `sbatch --array=1-313 ~/reproducibility/scripts/run_HIV_ci.sh` followed by executing `reproducibility/combine_HIV_ci.R` to get a data frame widths of confidence intervals for each of the possible colummns. Run `sbatch --array=1-16 ~/reproducibility/scripts/run_HIV_pval.sh` followed by `reproducibility/combine_HIV_pval.R` to get two data frames summarizing the number of raw discoveries and the number of gene level discoveries, respectively. In writing these functions, we have borrowed codes from the `R` implementation of the codes of [Luo et al. (2022)](https://arxiv.org/pdf/2208.09542).
 
 ## Reference
 If you use the codes from this repository or the results from the paper, consider citing Sengupta and Janson (2024). The BibTeX entry in given below:
