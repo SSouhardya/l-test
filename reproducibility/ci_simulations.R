@@ -32,8 +32,8 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
  				y.std = std(as.vector(y))
 
  				value_range = seq(from = bx-margin, to = bx+margin, length.out = r)
- 				ci_abs = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = -1, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE, outer_grid.length = 20, known_sigma = known_sigma) )
-  				ci_new = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = lambda, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE, outer_grid.length = 20, known_sigma = known_sigma) )
+ 				ci_abs = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = -1, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE, outer_grid.length = 30, known_sigma = known_sigma) )
+  				ci_new = range( l.ci_adjusted(y,X,ind, value_range, lambda = lambda, lambda_cv = lambda, coverage = coverage, smoothed = TRUE, display = FALSE, outer_approx = TRUE, outer_grid.length = 30, known_sigma = known_sigma) )
 
   				if(length(ci_abs) == 0){
   				    print('CV lambda length 0')
