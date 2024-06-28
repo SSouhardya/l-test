@@ -77,7 +77,7 @@ par(mgp = mgp, oma = oma, mfrow = mfrow, mar = mar)
 
 plot_CI_unadj('CI_summary_unadjusted1.list','Amplitude',c(0,1.3,2.3,3.3,4.3,5.3,6.3),6, se = 2, only_power = TRUE, cex.axis = cex.axis*3/2, cex = cex*3/2 ,pp=-2)
 plot_CI_unadj('CI_summary_unadjusted_sparsity.list','Sparsity',c(1,5,10,15,20,30,40,50),6, se = 2, only_power = TRUE, cex.axis = cex.axis*3/2, cex = cex*3/2 ,pp=-2)
-plot_CI_unadj('CI_summary_unadjusted_correlation.list','Correlation',c(0,0.1,0.3,0.5,0.7,0.9),17.5,only_power = TRUE, se = 2, pp = -2, cex.axis = cex.axis*3/2, cex = cex*3/2 )
+plot_CI_unadj('CI_summary_unadjusted_correlation.list','Correlation',c(0,0.1,0.3,0.5,0.7,0.9),18.5,only_power = TRUE, se = 2, pp = -2, cex.axis = cex.axis*3/2, cex = cex*3/2 )
 
 par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE, cex = cex.axis)
 plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
@@ -230,11 +230,11 @@ plot_CI_unadj('CI_summary_unadjusted2.list','Amplitude',c(0,1.3,2.3,3.3,4.3,5.3,
 
 #Reproducing Figure 15
 dev.new(width=6,height=2.5,unit = 'in',noRStudioGD = TRUE)
-plot_CI_unadj('CI_summary_unadjusted_corr.list','Correlation',c(0,0.1,0.3,0.5,0.7,0.9),17.5,plot_1se = TRUE, se = 2, pp = 'topleft',cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84)
+plot_CI_unadj('CI_summary_unadjusted_sparsity.list','Sparsity',c(1,5,10,15,20,30,40,50),7,plot_1se = TRUE, se = 2, cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84)
 
 #Reproducing Figure 16
 dev.new(width=6,height=2.5,unit = 'in',noRStudioGD = TRUE)
-plot_CI_unadj('CI_summary_unadjusted_sparsity.list','Sparsity',c(1,5,10,15,20,30,40,50),7,plot_1se = TRUE, se = 2, cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84)
+plot_CI_unadj('CI_summary_unadjusted_correlation.list','Correlation',c(0,0.1,0.3,0.5,0.7,0.9),18.5,plot_1se = TRUE, se = 2, pp = 'topleft',cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84)
 
 
 #Reproducing Figure 17
