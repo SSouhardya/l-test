@@ -9,9 +9,9 @@ The file `l_testing.R` contains the source code for implementing the $\ell$-test
 while the file `adjusted_l_testing.R` contains the codes for implementing the adjusted $\ell$-test-based confidence interval. Here are some basic examples of how to call these
 functions.
 
-```
+```R
 source('l_testing.R')
-source(`adjusted_l_testing.R')
+source('adjusted_l_testing.R')
 set.seed(1)
 
 n = 100
