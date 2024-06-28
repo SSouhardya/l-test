@@ -63,7 +63,7 @@ We first discuss generation of the output files for creating the plots in the pa
 Finally, to generate the plots, execute `repoducibility/plot_functions.R` followed by running the appropriate code-block from `reproducibility/plot_commands.R` to get the desired figure.
 
 ## Reference
-If you use the codes from this repository or the results from the paper, please consider citing Sengupta and Janson (2024). The BibTeX entry in given below:
+If you use the codes from this repository or the results from the paper, consider citing Sengupta and Janson (2024). The BibTeX entry in given below:
 ```
 @article{SS-LJ:2024,
   title={The $\ell$-test: leveraging sparsity in the Gaussian linear model for improved inference},
