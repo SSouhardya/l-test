@@ -8,6 +8,7 @@ source('adjusted_ci_with_known_sigma.R')
 ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=0,lambda = 0.02, m=3, coverage= 0.95, r= 2, margin = 10, sigma, normalize_cols = TRUE, adjusted=TRUE, mode = 1, known_sigma = FALSE, extra_counter = '1'){
 	require(MASS)
 	lambda_flag = lambda
+	print(adjusted)
 	if(adjusted){	
 		temp_table_abs = vector(length = 2)	#coverage and length respectively
 		temp_table_new = vector(length = 2)
@@ -20,11 +21,12 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
 					X = apply(X,2,g)
 				}
 
-				amplitudes = rep(bx,s)
+				amplitudes = (1-2*rbinom(s,1,0.5))*rep(bx,s)
 				random_ind = sample(1:p,s, replace = FALSE)
 				beta = rep(0,p)
 				beta[random_ind] = amplitudes
 				ind = random_ind[1]
+				bx = beta[ind]
 
  				y = intercept + X%*%beta + rnorm(n)
  				y.std = std(as.vector(y))
@@ -75,7 +77,6 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
  		}
 	}
 	else{
-		s = length(bz_vector)-1
 		table_lci.min = vector(length = 2)	#coverage and length respectively
 		table_lci.1se = vector(length = 2)	#coverage and length respectively
 		table_tci = vector(length = 2)
@@ -87,20 +88,21 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
 					X = apply(X,2,g)
 				}
 
-				amplitudes = rep(bx,s)
+				amplitudes = (1-2*rbinom(s,1,0.5))*rep(bx,s)
 				random_ind = sample(1:p,s, replace = FALSE)
 				beta = rep(0,p)
 				beta[random_ind] = amplitudes
 				ind = random_ind[1]
+				bx = beta[ind]
 
  				y = intercept + X%*%beta + rnorm(n)
 				
  				value_range = seq(from = bx-margin,to = bx+margin, length.out = r)
- 				temp = l.ci(y,X,ind, value_range, lambda = -1, lambda_cv = -1, coverage = coverage, adjusted = FALSE, display = FALSE, outer_approx = TRUE, outer_grid.length = r/10)
+ 				temp = l.ci(y,X,ind, value_range, lambda_cv = -1, coverage = coverage, outer_approx = TRUE, outer_grid.length = r/10)
 
  				ci_l.min = range(temp)
 
- 				temp = l.ci(y,X,ind, value_range, lambda = -2, lambda_cv = -2, coverage = coverage, adjusted = FALSE, display = FALSE, outer_approx = TRUE, outer_grid.length = r/10)
+ 				temp = l.ci(y,X,ind, value_range, lambda_cv = -2, coverage = coverage, outer_approx = TRUE, outer_grid.length = r/10)
  				ci_l.1se = range(temp)
 
  				table_lci.min[1] =  as.numeric(ci_l.min[1] <= bx & bx <= ci_l.min[2])
@@ -110,42 +112,22 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
  				table_lci.1se[1] =  as.numeric(ci_l.1se[1] <= bx & bx <= ci_l.1se[2])
  				table_lci.1se[2] =  ci_l.1se[2] - ci_l.1se[1]
 
-				indic1 = vector(length = length(value_range))	#this is for the confidence interval that knows the true sign
-				indic2 = indic1	#this is for the two-sided confidence interval
+ 				fit = lm(y~X)
+ 				ci_t = as.vector(confint(fit, level = coverage)[1+ind,])
+ 				ci_t_1 = as.vector(confint(fit, level = 1-2*(1-coverage) )[1+ind,])
+ 				if(ci_t_1[1]<bx & ci_t_1[2]>bx){
+ 					ci_t_one = ci_t_1
+ 				} else if(bx< ci_t_1[1]){
+ 					ci_t_one = c(bx, ci_t_1[2])
+ 				} else if (bx>ci_t_1[2]){
+ 					ci_t_one = c( ci_t_1[1],bx)
+ 				}
 
-				for(i in 1:length(value_range)){
- 					val = value_range[i]
- 					z = y - val*X[,ind]
- 					z.std = std(z)
- 		 			fit = lm(z.std~X)
-			    	est = summary(fit)$coef[1+ind,1]
-			    	se = summary(fit)$coef[1+ind,2]
-  					tstat = (est)/se
-					indic2[i] = as.numeric( 2*pt(abs(tstat), df = n-p-1, lower.tail = FALSE)> 1-coverage)
- 					indic1[i] = as.numeric( pt(tstat, df = n-p-1, lower.tail = (bx<val)) > 1-coverage)
-				}
-                inds2 = which(indic2 == 1)
-	        	if(min(inds2)!=1){
-		        	inds2 = c(min(inds2)-1, inds2)
-	        	}
-	        	if(max(inds2) != length(value_range) ){
-	        		inds2 = c(inds2, max(inds2)+1)
-	        	}
- 	  			ci_t = range(value_range[inds2])
-  				table_tci[1] = as.numeric(ci_t[1] <= bx & bx <= ci_t[2])
+ 				table_tci[1] = as.numeric(ci_t[1] <= bx & bx <= ci_t[2])
  				table_tci[2] = ci_t[2] - ci_t[1] 
 
-                inds1 = which(indic1 == 1)
-	        	if(min(inds1)!=1){
-		        	inds1 = c(min(inds1)-1, inds1)
-	        	}
-	        	if(max(inds1)!= length(value_range) ){
-	        		inds1 = c(inds1, max(inds1)+1)
-	        	}
- 	  			ci_t = range(value_range[inds1])
- 	  			
-  				table_tci_target[1] = as.numeric(ci_t[1] <= bx & bx <= ci_t[2])
- 				table_tci_target[2] = ci_t[2] - ci_t[1] 
+ 				table_tci_target[1] = as.numeric(ci_t_one[1] <= bx & bx < ci_t_one[2])
+				table_tci_target[2] = ci_t_one[2] - ci_t_one[1] 
 
  				return(c(table_lci.min, table_lci.1se, table_tci, table_tci_target))
  			}
@@ -160,12 +142,13 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
 
 
 #input to the above function is a parameter file that should be in the form of a list of lists.
-#each of the individual list should contain two lists. The first list should be the values of c(n,p,ind,intercept, rho, lambda, m, coverage, r, margin, sigma, normalize_cols, adjusted, mode, known_sigma) in this order where they mean:
+#each of the individual list should contain two lists. The first list should be the values of c(n,p,ind,intercept, s, rho, lambda, m, coverage, r, margin, sigma, normalize_cols, adjusted, mode, known_sigma) in this order where they mean:
 
 #n: number of rows of X
 #p: the dimension of X
 #ind: The index (without considering the intercept) of the coefficient which we are inferrring upon.
 #intercept: A logical variable. TRUE if we want to include the intercept.
+#s: The number of signal variables.
 #rho: Intervariable correlations (in a toeplitz design)
 #lambda: The selection lambda (of no use if adjusted = TRUE)
 #m: Number of replications in a single run
@@ -190,6 +173,7 @@ set.seed(slurm_ind)
 
 
 par_filename = commandArgs(trailingOnly=TRUE)
+print(par_filename) #DELETE THIS
 par_list = readRDS(par_filename)
 
 par_length = length(par_list)
