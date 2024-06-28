@@ -142,7 +142,7 @@ ci_simulations<-function(bx_range, n=60, p = 30, ind = 1,intercept = 0,s=5, rho=
 
 
 #input to the above function is a parameter file that should be in the form of a list of lists.
-#each of the individual list should contain two lists. The first list should be the values of c(n,p,ind,intercept, s, rho, lambda, m, coverage, r, margin, sigma, normalize_cols, adjusted, mode, known_sigma) in this order where they mean:
+#each of the individual list should contain two lists. The first list should be the values of c(n,p,ind,intercept,s, rho, lambda, m, coverage, r, margin, sigma, normalize_cols, adjusted, mode, known_sigma) in this order where they mean:
 
 #n: number of rows of X
 #p: the dimension of X
