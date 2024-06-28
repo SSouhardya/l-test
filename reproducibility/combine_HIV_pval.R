@@ -3,7 +3,7 @@ get_position <- function(x){
 }
 
 
-load('HIV_data.RData')
+load('/reproducibility/data/HIV_data.RData')
 
 raw_disc = matrix(0, nrow = 16, ncol = 4)
 gene_disc = raw_disc
