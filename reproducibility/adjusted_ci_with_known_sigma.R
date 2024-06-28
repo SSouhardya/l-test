@@ -81,6 +81,7 @@ l.cdf_adjusted<-function(x,y,X,ind,gamma, lambda_cv , lambda , display = FALSE, 
 
 l.ci_adjusted<-function(y,X,ind, gamma_range, lambda,  lambda_cv=-1, coverage = 0.95, display = FALSE, smoothed = FALSE, outer_approx = FALSE, outer_grid.length = 10, known_sigma = FALSE){
 	require(CVXR)
+	require(glmnet)
 
 	g.length = length(gamma_range)
 	lambda_cv_flag = lambda_cv
@@ -251,5 +252,3 @@ l.ci_adjusted<-function(y,X,ind, gamma_range, lambda,  lambda_cv=-1, coverage = 
 	}
 	return(c(ci.left, ci.right))
 }
-
-
