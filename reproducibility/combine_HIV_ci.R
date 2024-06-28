@@ -6,4 +6,4 @@ for(i in 2:313){
     temp = temp[which(temp[,1]!=-1),]
     combined = rbind(combined, temp)
 	}
-write.csv(combined, 'all_widths.csv', row.names = FALSE)
+write.csv(combined, 'all_widths_HIV.csv', row.names = FALSE)
