@@ -226,7 +226,7 @@ plot_CI_unadj('CI_summary_unadjusted1.list','Amplitude',c(0,1.3,2.3,3.3,4.3,5.3,
 
 #Reproducing Figure 14
 dev.new(width=6,height=2.5,unit = 'in',noRStudioGD = TRUE)
-plot_CI_unadj('CI_summary_unadjusted2.list','Amplitude',c(0,1.3,2.3,3.3,4.3,5.3,6.3),16,plot_1se = TRUE, se = 2,cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84)
+plot_CI_unadj('CI_summary_unadjusted2.list','Amplitude',c(0,1.3,2.3,3.3,4.3,5.3,6.3),17,plot_1se = TRUE, se = 2,cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84)
 
 #Reproducing Figure 15
 dev.new(width=6,height=2.5,unit = 'in',noRStudioGD = TRUE)
@@ -239,5 +239,5 @@ plot_CI_unadj('CI_summary_unadjusted_correlation.list','Correlation',c(0,0.1,0.3
 
 #Reproducing Figure 17
 dev.new(width=6,height=2.5,unit = 'in',noRStudioGD = TRUE)
-plot_CI_adj('CI_summary_adjusted2.list',18, se = 2, cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84, string2 = 'CI_summary_adjusted2_known.list')
+plot_CI_adj('CI_summary_adjusted2.list',18, se = 2, cex = 0.4, cex.axis = 0.84*1.2, cex.axis.legend=0.84, string2 = 'CI_summary_adjusted2_known_sigma.list')
 
