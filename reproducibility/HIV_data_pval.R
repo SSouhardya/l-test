@@ -54,7 +54,7 @@ set.seed(slurm_ind)
 display = FALSE
 
 
-load('HIV_data.RData')
+load('/reproducibility/data/HIV_data.RData')
 
 
 if(slurm_ind %in% 1:7){
