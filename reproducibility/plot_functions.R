@@ -1,4 +1,3 @@
-
 plot_uncond<-function(string, xrange, xlab, ylab = 'Power', save_pdf = FALSE, height = 5, width = 5, plot_position = 'topleft', main = NULL, ylim = NULL, skip_onesided = FALSE, se = 1, times = 200, pch = 19, cex = 1, cex.axis = 2, rm_y = FALSE){
 	ll = readRDS(string)
 	tab = ll[[1]]
@@ -272,17 +271,17 @@ plot_CI_adj<-function(string, ylim, se = 2, coverage = 0.95, color = c('blue','r
 
 
 
-single_var_plot_cluster<-function(se = 2, ylim = NA, m = 100, log = TRUE, pp='topleft', string = 'variation_sigle_test_non_log_list.list', cex.axis = 1, cex = 1){
+single_var_plot<-function(se = 2, ylim = NA, m = 100, log = TRUE, pp='topleft', string = 'variation_ltest_log.list', cex.axis = 1, cex = 1){
 	bundle = readRDS(string)
 	mean_tab = bundle[[1]]
 	sd_tab = bundle[[2]]
 	mean_tab = mean_tab[,2:1]
 	sd_tab = sd_tab[,2:1]
-	if(log){
-		mean_tab[,1] = 0.5*(mean_tab[,1] - log(m^2-1))
-		mean_tab[,2] = 0.5*(mean_tab[,2] - log(m^2-m))
-		sd_tab = 0.5*sd_tab
-	}
+	#if(log){
+	#	mean_tab[,1] = 0.5*(mean_tab[,1] - log(m^2-1))
+	#	mean_tab[,2] = 0.5*(mean_tab[,2] - log(m^2-m))
+	#	sd_tab = 0.5*sd_tab
+	#}
 	xlim = c(min(mean_tab[,1] - se*sd_tab[,1]), max(mean_tab[,1] + se*sd_tab[,1]))
 	if(sum(is.na(ylim))){
 		ylim = c(min(mean_tab[,2] - se*sd_tab[,2]), max(mean_tab[,2] + se*sd_tab[,2]))
@@ -314,14 +313,3 @@ single_var_plot_cluster<-function(se = 2, ylim = NA, m = 100, log = TRUE, pp='to
 		lty = c(1,2)
 	)
 }
-
-
-
-
-
-
-
-
-
-
-
