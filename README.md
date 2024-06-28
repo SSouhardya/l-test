@@ -50,20 +50,20 @@ The folder `reproducibility` contains the codes for reproducing the simulation r
 We provide scripts for submitting multiple jobs to the cluster in `reproducibility/scripts`, however note that the user needs to update them with the file locations, the partition names, etc., before running them.
 
 We first discuss generation of the output files for creating the plots in the paper.
-1. _For Figures 2 and 8_: For generating the files for the figures in Figure 8 and the left and center panels of Figure 2, run the file `single_test.R` by un-commenting Blocks 1,2 or 3 of paremeter specifications in the file.
+1. **For Figures 2 and 8**: For generating the files for the figures in Figure 8 and the left and center panels of Figure 2, run the file `single_test.R` by un-commenting Blocks 1,2 or 3 of parameter specifications in the file.
    For generating the figure on the right panel of Figure 2, un-comment Block 4, set the value of the variable `cluster` in line 150 to TRUE and run the file 500 times (in the computing cluster) followed by running `combine_results_ltest_sparsity.R` to produce the desired
    file. You may use `scripts/run_test.sh` to submit jobs to the cluster.
-2. _For Figures 3, 9, 10, 11 and 12_: Run the file `reproducibility/robustness_simulations.R`.
+2. **For Figures 3, 9, 10, 11 and 12**: Run the file `reproducibility/robustness_simulations.R`.
    For Figures 4, 5, 13, 14, 15, 16 and 17: Submit multiple jobs to the cluster: `sbatch --array=1-times reproducibility/scripts/run_ci.sh reproducibility/ci_parameter_files/filename.RData`, where
    for the left panel of Figure 4 and Figures 13 and 14 `filename` is `par_unadj_ci_amplitude` and `times` is 50, for the center panel of Figure 4 and Figure 15, `filename` is `par_unadj_ci_sparsity` and `times` is 500,
    for the right panel of Figure 4 and Figure 16, `filename` is `par_unad_ci_correlation` and `times` is 50, for Figures 5 and 17, execute two runs with `filename` taking values `par_adj_ci_amplitude` and
-   `par_adj_ci_amplitude_known_sigma` respectively and `times` equal 1000 in both the cases. After this, run `reproducibility/scripts/combine_ci_results.sh` to get the desired files.
-3. _For Figure 6_: Run the file `reproducibility/ltest_variability.R` followed by `reproducibility/combine_ltest_variability.R`.
-4. _For Figure 7_: Run the file `reproducibility/three_lambda_choices.R`
+   `par_adj_ci_amplitude_known_sigma` respectively and `times` equaling 1000 in both the cases. After this, run `reproducibility/scripts/combine_ci_results.sh` to get the desired files.
+3. **For Figure 6**: Run the file `reproducibility/ltest_variability.R` followed by `reproducibility/combine_ltest_variability.R`.
+4. **For Figure 7**: Run the file `reproducibility/three_lambda_choices.R`
 
 Finally, to generate the plots, execute `repoducibility/plot_functions.R` followed by running the appropriate code-block from `reproducibility/plot_commands.R` to get the desired figure.
 
-5. _For the claims in Section 5.5 of the paper_: This section involves an analysis on the HIV drug resistance dataset. The data is available in the folder `data`. Submit 313 jobs to the cluster:  `sbatch --array=1-313 ~/reproducibility/scripts/run_HIV_ci.sh` followed by executing `reproducibility/combine_HIV_ci.R` to get a data frame of the widths of the confidence intervals for each of the possible columns. Submit 16 jobs: `sbatch --array=1-16 ~/reproducibility/scripts/run_HIV_pval.sh` followed by `reproducibility/combine_HIV_pval.R` to get two data frames summarizing the number of raw discoveries and the number of gene level discoveries, respectively. In writing these functions, we have borrowed codes from the `R` implementation of [Luo et al. (2022)](https://arxiv.org/pdf/2208.09542).
+5. **For the results in Section 5.5 of the paper**: This section involves an analysis on the HIV drug resistance dataset. The data is available in the folder `data`. Submit 313 jobs to the cluster:  `sbatch --array=1-313 ~/reproducibility/scripts/run_HIV_ci.sh` followed by executing `reproducibility/combine_HIV_ci.R` to get a data frame of the widths of the confidence intervals for each of the possible columns of all possible datasets. Submit 16 jobs: `sbatch --array=1-16 ~/reproducibility/scripts/run_HIV_pval.sh` followed by `reproducibility/combine_HIV_pval.R` to get two data frames summarizing the number of raw discoveries and the number of gene level discoveries, respectively at 5%. In writing these functions, we have borrowed codes from the `R` implementation of [Luo et al. (2022)](https://arxiv.org/pdf/2208.09542).
 
 ## Reference
 ```
