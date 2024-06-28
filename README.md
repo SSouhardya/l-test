@@ -46,8 +46,8 @@ ci_l_adjusted = l.ci_adjusted(y,X,j, gamma_range = gamma_range, coverage = 0.95,
 ```
 
 ## Reproducing results from the paper
-The folder `reproducibility` contains the codes for reproducing the simulation results from the paper. Some of these were directly run on single computer while for others we used a computing cluster with a Slurm manager.
-We provide scripts for submitting multiple jobs to the cluster in `reproducibility/scripts`, however note that the user need to update them with the file locations, the partition names, etc., before running them.
+The folder `reproducibility` contains the codes for reproducing the simulation results from the paper. Some of these were directly run on a single computer while for others we used a computing cluster with a Slurm manager.
+We provide scripts for submitting multiple jobs to the cluster in `reproducibility/scripts`, however note that the user needs to update them with the file locations, the partition names, etc., before running them.
 
 We first discuss generation of the output files for creating the plots in the paper.
 1. _For Figures 2 and 8_: For generating the files for the figures in Figure 8 and the left and center panels of Figure 2, run the file `single_test.R` by un-commenting Blocks 1,2 or 3 of paremeter specifications in the file.
