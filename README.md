@@ -1,6 +1,6 @@
 # Code repository for `The $\ell$-test: leveraging sparsity in the Gaussian linear model for improved inference' by Sengupta and Janson (2024).
 This repository contains source codes for implementing the $\ell$-test-based procedures and for reproducing the figures from the paper. These procedures are alternatives to the traditional $t$-based inference
-procedures in the Gaussian linear model, having exactly the same guarantees showing significant power gains when the coefficient vector is not too dense. In fact, our alternative to the $t$-test, which we
+methods in the Gaussian linear model, having exactly the same guarantees and showing significant power gains when the coefficient vector is not too dense. In fact, our alternative to the $t$-test, which we
 call the $\ell$-test achieves power close to the one-sided $t$-test for sparse coefficient vectors without any knowledge about the true sign of the alternative coefficient. Check out our
 paper at [http://arxiv.org/abs/2406.18390](http://arxiv.org/abs/2406.18390) for more details. 
 
