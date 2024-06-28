@@ -50,7 +50,7 @@ string = paste0('robustness_ltest_size_','hetero1',8,'.list')
 plot_uncond(string, xrange, 'Sample size', plot_position = -2, ylim = c(0,0.2), skip_onesided=TRUE,  cex.axis = cex.axis*3/(2.5), cex = cex*3/(2.5), pch = 19, main = 'Heteroskedastic error', ylab = 'Typr I error')
 abline(h = 0.05, col = 'black', lwd = 2, lty = 2)
 
-string = paste0('robustness_ltest_size_non_linear_',4,'.list')
+string = paste0('robustness_ltest_size_non_linear',4,'.list')
 plot_uncond(string, xrange, 'Sample size', plot_position = -2, ylim = c(0,0.2), skip_onesided=TRUE, cex.axis = cex.axis*3/(2.5), cex = cex*3/(2.5), pch = 19, main = 'Non-linearity', ylab = 'Type I error')
 abline(h = 0.05, col = 'black', lwd = 2, lty = 2)
 
@@ -77,7 +77,7 @@ par(mgp = mgp, oma = oma, mfrow = mfrow, mar = mar)
 
 plot_CI_unadj('CI_summary_unadjusted1.list','Amplitude',c(0,1.3,2.3,3.3,4.3,5.3,6.3),6, se = 2, only_power = TRUE, cex.axis = cex.axis*3/2, cex = cex*3/2 ,pp=-2)
 plot_CI_unadj('CI_summary_unadjusted_sparsity.list','Sparsity',c(1,5,10,15,20,30,40,50),6, se = 2, only_power = TRUE, cex.axis = cex.axis*3/2, cex = cex*3/2 ,pp=-2)
-plot_CI_unadj('CI_summary_unadjusted_corr.list','Correlation',c(0,0.1,0.3,0.5,0.7,0.9),17.5,only_power = TRUE, se = 2, pp = -2, cex.axis = cex.axis*3/2, cex = cex*3/2 )
+plot_CI_unadj('CI_summary_unadjusted_correlation.list','Correlation',c(0,0.1,0.3,0.5,0.7,0.9),17.5,only_power = TRUE, se = 2, pp = -2, cex.axis = cex.axis*3/2, cex = cex*3/2 )
 
 par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE, cex = cex.axis)
 plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
@@ -100,7 +100,7 @@ cex.axis = 1
 cex = 0.3
 se = 2
 par(mgp = c(1.5,0.5,0), oma = c(0.25,0.25,0.25,0.25), mfrow = c(1,1), mar = c(2.5, 2.5, 0.3, 0.3))
-single_var_plot_cluster(2,ylim = c(-13,-1),string = 'variation_sigle_test_list.list', log = TRUE, cex.axis = cex.axis, cex=cex)
+single_var_plot(2,ylim = c(-14,-1),string = 'variation_ltest_log.list', log = TRUE, cex.axis = cex.axis, cex=cex)
 
 
 
