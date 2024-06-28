@@ -66,7 +66,6 @@ Finally, to generate the plots, execute `repoducibility/plot_functions.R` follow
 5. _For the claims in Section 5.5 of the paper_: This section involves an analysis on the HIV drug resistance dataset. The data is available in the folder `data`. Run `sbatch --array=1-313 ~/reproducibility/scripts/run_HIV_ci.sh` followed by executing `reproducibility/combine_HIV_ci.R` to get a data frame of the widths of the confidence intervals for each of the possible columns. Run `sbatch --array=1-16 ~/reproducibility/scripts/run_HIV_pval.sh` followed by `reproducibility/combine_HIV_pval.R` to get two data frames summarizing the number of raw discoveries and the number of gene level discoveries, respectively. In writing these functions, we have borrowed codes from the `R` implementation of [Luo et al. (2022)](https://arxiv.org/pdf/2208.09542).
 
 ## Reference
-If you use the codes from this repository or the results from the paper, consider citing Sengupta and Janson (2024). The BibTeX entry in given below:
 ```
 @article{SS-LJ:2024,
   title={The $\ell$-test: leveraging sparsity in the Gaussian linear model for improved inference},
