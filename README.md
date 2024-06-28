@@ -10,6 +10,8 @@ while the file `adjusted_l_testing.R` contains the codes for implementing the ad
 functions.
 
 ```
+source('l_testing.R')
+source(`adjusted_l_testing.R')
 set.seed(1)
 
 n = 100
