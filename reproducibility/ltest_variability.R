@@ -5,10 +5,11 @@ source('~/l_testing.R')
 
 
 single_test_variability<-function(a){
+require(glmnet)
 n = 100
 p = 50
 m = 100
-ind = 1
+
 
 pvals = matrix(0, nrow = m, ncol = m)
 lambda_vals = pvals
@@ -17,7 +18,11 @@ for(i in 1:m){
 	print(i)
 	X = matrix(rnorm(n*p), nrow = n)
 	X = apply(X,2,g)
-	beta = c(rep(a,5), rep(0,p-5))
+	signal_vec = (1-2*rbinom(5,1,0.5))*rep(a,5)
+	random_ind = sample(1:p, size = 5, replace = FALSE)
+	ind = random_ind[1]
+	beta = rep(0,p)
+	beta[random_ind] = signal_vec
 	y = as.vector(X%*%beta + rnorm(n))
 	Z = cbind(rep(1,n), X[,-1])
  	proj = Z%*%solve(t(Z)%*%Z,t(Z))
@@ -25,13 +30,12 @@ for(i in 1:m){
  	sigma.hat = sqrt(sum(((diag(n)-proj)%*%(y))^2))
  	V = qr.Q(qr(diag(n)-proj))[,1:(n-ncol(Z))]
 	for(j in 1:m){
-		#print(c(i,j))
  		 u = rnorm(n-ncol(Z))
    		 u = u/sqrt(sum(u^2))
     	 y_new = y.hat + sigma.hat*V%*%u
     	 lambda = cv.glmnet( X,y_new,standardize=FALSE)$lambda.min
     	 lambda_vals[i,j] = lambda
-    	 pvals[i,j] = l.test_glmnet(y,X,ind, lambda= lambda, lambda_cv= lambda, adjusted = FALSE, smoothed = TRUE)
+    	 pvals[i,j] = l.test(y,X,ind, lambda= lambda, lambda_cv = lambda, adjusted = FALSE, smoothed = TRUE)
 	}
 }
 pvals1 = pvals
