@@ -173,7 +173,6 @@ set.seed(slurm_ind)
 
 
 par_filename = commandArgs(trailingOnly=TRUE)
-print(par_filename) #DELETE THIS
 par_list = readRDS(par_filename)
 
 par_length = length(par_list)
