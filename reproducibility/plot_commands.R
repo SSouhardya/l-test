@@ -156,7 +156,7 @@ cex.axis = 1
 cex = 0.3
 se = 2
 par(mgp = c(1.5,0.5,0), oma = c(0.25,0.25,0.25,0.25), mfrow = c(1,1), mar = c(2.5, 2.5, 0.3, 0.3))
-plot_uncond('unconditional_test_summary_setting2.list', c(0,1.3,2.3,3.3,4.3,5.3,6.3), 'Amplitude', plot_position = 'topleft',cex.axis = cex.axis, cex = cex)
+plot_uncond('unconditional_test_summary_setting2.list', c(0,1.3,2.3,3.3,4.3,5.3,6.3), 'Amplitude', ylim = c(0,1), plot_position = 'topleft',cex.axis = cex.axis, cex = cex)
 
 
 
