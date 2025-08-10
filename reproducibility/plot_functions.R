@@ -182,7 +182,7 @@ plot_CI_unadj<-function(string, xname, xrange, ylim, save_pdf = FALSE, width = 5
 
 
 
-plot_CI_adj<-function(string, ylim, se = 2, coverage = 0.95, color = c('blue','red','darkgreen'),cex = 1, cex.axis = 1, cex.axis.legend = 1, string2 = NULL){
+plot_CI_adj<-function(string, ylim, se = 2, coverage = 0.95, color = c('blue','red','darkgreen'),cex = 1, cex.axis = 1, cex.axis.legend = 1, string2 = NULL, blue_lwd_factor = 1){
 
 	bundle = readRDS(string)
 	tab = bundle[[1]]
@@ -197,11 +197,11 @@ plot_CI_adj<-function(string, ylim, se = 2, coverage = 0.95, color = c('blue','r
 
 	par(mgp = c(1.5,0.5,0), oma = c(1,0.25,0.25,0.25), mfrow = c(1,2), mar = c(3, 2.5, 0.1, 0.3), cex = cex.axis.legend)
 	plot(0, xlim = range(amplitude), ylim = c(0,1), xlab = 'Amplitude', ylab = 'Coverage', col = 'white',cex.axis = cex.axis, cex.lab = cex.axis, cex = cex)
-	points(amplitude, tab[,2], pch = 19, col = color[1], type = 'l', lwd = 2, cex = cex)
-	points(amplitude, tab[,2], pch = 19, col = color[1], type = 'p', lwd = 2, cex = cex)
+	points(amplitude, tab[,2], pch = 19, col = color[1], type = 'l', lwd = 2*blue_lwd_factor, cex = cex)
+	points(amplitude, tab[,2], pch = 19, col = color[1], type = 'p', lwd = 2*blue_lwd_factor, cex = cex)
 
 	for(i in 1:length(amplitude)){
-		points(c(amplitude[i],amplitude[i]), c( tab[i,2]-se*std_error[i,2],tab[i,2]+se*std_error[i,2]), pch = 19, col = color[1], type = 'l', lwd = 2, cex = cex)
+		points(c(amplitude[i],amplitude[i]), c( tab[i,2]-se*std_error[i,2],tab[i,2]+se*std_error[i,2]), pch = 19, col = color[1], type = 'l', lwd = 2*blue_lwd_factor, cex = cex)
 	}
 	points(amplitude, tab[,4], pch = 19, col = color[2], type = 'l', lwd = 2, cex = cex)
 	points(amplitude, tab[,4], pch = 19, col = color[2], type = 'p', lwd = 2, cex = cex)
@@ -214,11 +214,11 @@ plot_CI_adj<-function(string, ylim, se = 2, coverage = 0.95, color = c('blue','r
 		points(c(amplitude[i],amplitude[i]), c( tab[i,6]-se*std_error[i,6],tab[i,6]+se*std_error[i,6]), pch = 19, col = color[3], type = 'l', lwd = 2, cex = cex)
 	}
 	if(!is.null(string2)){
-		points(amplitude, tab1[,2], pch = 19, col = color[1], type = 'l',  lty=2,lwd = 2, cex = cex)
-		points(amplitude, tab1[,2], pch = 19, col = color[1], type = 'p', lwd = 2, cex = cex)
+		points(amplitude, tab1[,2], pch = 19, col = color[1], type = 'l',  lty=2,lwd = 2*blue_lwd_factor, cex = cex)
+		points(amplitude, tab1[,2], pch = 19, col = color[1], type = 'p', lwd = 2*blue_lwd_factor, cex = cex)
 
 		for(i in 1:length(amplitude)){
-			points(c(amplitude[i],amplitude[i]), c( tab1[i,2]-se*std_error1[i,2],tab1[i,2]+se*std_error1[i,2]), pch = 19, col = color[1], type = 'l', lwd = 2,  cex = cex)
+			points(c(amplitude[i],amplitude[i]), c( tab1[i,2]-se*std_error1[i,2],tab1[i,2]+se*std_error1[i,2]), pch = 19, col = color[1], type = 'l', lwd = 2*blue_lwd_factor,  cex = cex)
 		}
 		points(amplitude, tab1[,4], pch = 19, col = color[2], type = 'l', lty=2, lwd = 2, cex = cex)
 		points(amplitude, tab1[,4], pch = 19, col = color[2], type = 'p', lwd = 2, cex = cex)
@@ -230,10 +230,10 @@ plot_CI_adj<-function(string, ylim, se = 2, coverage = 0.95, color = c('blue','r
 
 	plot(0, xlim = range(amplitude), ylim = c(0,ylim), xlab = 'Amplitude', ylab = 'Length', col = 'white',cex.axis = cex.axis, cex.lab = cex.axis, cex = cex)
 
-	points(amplitude, tab[,3], pch = 19, col = color[1], type = 'l', lwd = 2, cex = cex)
-	points(amplitude, tab[,3], pch = 19, col = color[1], type = 'p', lwd = 2, cex = cex)
+	points(amplitude, tab[,3], pch = 19, col = color[1], type = 'l', lwd = 2*blue_lwd_factor, cex = cex)
+	points(amplitude, tab[,3], pch = 19, col = color[1], type = 'p', lwd = 2*blue_lwd_factor, cex = cex)
 	for(i in 1:length(amplitude)){
-		points(c(amplitude[i],amplitude[i]), c( tab[i,3]-se*std_error[i,3],tab[i,3]+se*std_error[i,3]), pch = 19, col = color[1], type = 'l', lwd = 2, cex = cex)
+		points(c(amplitude[i],amplitude[i]), c( tab[i,3]-se*std_error[i,3],tab[i,3]+se*std_error[i,3]), pch = 19, col = color[1], type = 'l', lwd = 2*blue_lwd_factor, cex = cex)
 	}
 	points(amplitude, tab[,5], pch = 19, col = color[2], type = 'l', lwd = 2, cex = cex)
 	points(amplitude, tab[,5], pch = 19, col = color[2], type = 'p', lwd = 2, cex = cex)
@@ -247,11 +247,11 @@ plot_CI_adj<-function(string, ylim, se = 2, coverage = 0.95, color = c('blue','r
 	}
 
 	if(!is.null(string2)){
-		points(amplitude, tab1[,3], pch = 19, col = color[1], type = 'l', lty=2, lwd = 2, cex = cex)
-		points(amplitude, tab1[,3], pch = 19, col = color[1], type = 'p', lwd = 2, cex = cex)
+		points(amplitude, tab1[,3], pch = 19, col = color[1], type = 'l', lty=2, lwd = 2*blue_lwd_factor, cex = cex)
+		points(amplitude, tab1[,3], pch = 19, col = color[1], type = 'p', lwd = 2*blue_lwd_factor, cex = cex)
 
 		for(i in 1:length(amplitude)){
-			points(c(amplitude[i],amplitude[i]), c( tab1[i,3]-se*std_error1[i,3],tab1[i,3]+se*std_error1[i,3]), pch = 19, col = color[1], type = 'l', lwd = 2, cex = cex)
+			points(c(amplitude[i],amplitude[i]), c( tab1[i,3]-se*std_error1[i,3],tab1[i,3]+se*std_error1[i,3]), pch = 19, col = color[1], type = 'l', lwd = 2*blue_lwd_factor, cex = cex)
 		}
 		points(amplitude, tab1[,5], pch = 19, col = color[2], type = 'l', lty=2, lwd = 2, cex = cex)
 		points(amplitude, tab1[,5], pch = 19, col = color[2], type = 'p', lwd = 2, cex = cex)
